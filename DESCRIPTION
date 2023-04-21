@@ -1,0 +1,11 @@
+Package: hosseinFinal
+Title: The BMI 510 Final Project R Package
+Version: 0.0.0.9000
+Authors@R: 
+    person("Hossein", "Amiri", , "hossein.amiri@emory.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-0926-7679"))
+Description: During the semester we have created many function from scratch to calculate course related materials. In this package some of them are packed as a packaging practice in R
+License: use_mit_license()
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
