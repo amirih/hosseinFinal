@@ -156,7 +156,7 @@ rep_mat = function(x, M = 1, N = 1) {
 #' [1] "integer"
 #' @export
 classes = function(x) {
-  if (is.data.frame(x)) {
+  if (is.data.frame(x) || is_tibble(x)) {
     return(sapply(x, class))
   }
   else {

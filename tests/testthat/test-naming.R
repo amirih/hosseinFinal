@@ -1,6 +1,4 @@
 # Test case to check if all functions are implemented
-library(testthat)
-
 test_that("All functions are implemented", {
   expect_true(is.function(rando))
   expect_true(is.function(is_min))

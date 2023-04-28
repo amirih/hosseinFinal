@@ -1,6 +1,5 @@
 library(testthat)
 library(tibble)
-library(hosseinFinal)
 # Test case for the `rando` function
 test_that("rando", {
   # Test sampling from an atomic vector without replacement
@@ -81,7 +80,7 @@ test_that("is_min function works as expected", {
   expect_equal(is_min(c(3, 3, 3)), c(TRUE, TRUE, TRUE))
 
   # Test case 5: vector with negative values
-  expect_equal(is_min(c(-5,-3, 0, 2, 4)), c(TRUE, FALSE, FALSE, FALSE, FALSE))
+  expect_equal(is_min(c(-5, -3, 0, 2, 4)), c(TRUE, FALSE, FALSE, FALSE, FALSE))
 })
 
 # Define the test cases
@@ -99,7 +98,7 @@ test_that("is_max function works as expected", {
   expect_equal(is_max(c(3, 3, 3)), c(TRUE, TRUE, TRUE))
 
   # Test case 5: vector with negative values
-  expect_equal(is_max(c(-5, -3, 0, 2, 4)), c(FALSE, FALSE, FALSE, FALSE, TRUE))
+  expect_equal(is_max(c(-5,-3, 0, 2, 4)), c(FALSE, FALSE, FALSE, FALSE, TRUE))
 })
 
 
@@ -133,14 +132,11 @@ test_that("rep_mat function works as expected", {
   expect_error(rep_mat(incorrect_input), "x must be a dataframe or matrix")
 })
 
-test_that("classes function works as expected", {
+test_that("classes function works as expected with data.frame", {
   # Create a dataframe
   df <-
-    data.frame(
-      a = 1:3,
-      b = c("one", "two", "three"),
-      stringsAsFactors = FALSE
-    )
+    data.frame(a = 1:3,
+               b = c("one", "two", "three"))
 
   # Test classes function for a dataframe
   column_classes <- classes(df)
@@ -156,6 +152,21 @@ test_that("classes function works as expected", {
   expect_equal(factor_class, "factor")
 })
 
+test_that("classes function works as expected with tibble", {
+  # Create a dataframe
+  tbl <-
+    tibble(a = 1:3,
+           b = c("one", "two", "three"),)
+
+  # Test classes function for a dataframe
+  column_classes_tbl <- classes(tbl)
+  expect_equal(column_classes_tbl, c(a = "integer", b = "character"))
+
+  # Test classes function for a single factor object
+  factor_obj_tbl <- factor(c("a", "b", "c"))
+  factor_class_tbl <- classes(factor_obj_tbl)
+  expect_equal(factor_class_tbl, "factor")
+})
 test_that("df_scale function works with data.frame as expected", {
   # Create a dataframe
   df <-
@@ -276,7 +287,8 @@ test_that("log_likelihood_norm function works as expected", {
   x <- rnorm(10, mean = 2, sd = 0.5)
 
   # Calculate the true log-likelihood
-  true_log_likelihood <- sum(dnorm(x, mean = 2, sd = 0.5, log = TRUE))
+  true_log_likelihood <-
+    sum(dnorm(x, mean = 2, sd = 0.5, log = TRUE))
 
   # Calculate the estimated log-likelihood
   mean_est <- 2
@@ -311,13 +323,15 @@ test_that("log_likelihood_unif function works as expected", {
   true_log_likelihood <- sum(dunif(x, min = 2, max = 5, log = TRUE))
 
   # Calculate the estimated log-likelihood for the correct uniform distribution
-  est_log_likelihood_correct <- log_likelihood_unif(x, min = 2, max = 5)
+  est_log_likelihood_correct <-
+    log_likelihood_unif(x, min = 2, max = 5)
 
   # Check if the estimated log-likelihood is close enough to the true log-likelihood
   expect_true(abs(est_log_likelihood_correct - true_log_likelihood) < 1)
 
   # Calculate the estimated log-likelihood for a different uniform distribution
-  est_log_likelihood_different <- log_likelihood_unif(x, min = 0, max = 10)
+  est_log_likelihood_different <-
+    log_likelihood_unif(x, min = 0, max = 10)
 
   # Check if the log-likelihood for the different distribution is less than the correct one
   expect_true(est_log_likelihood_different < est_log_likelihood_correct)
@@ -353,13 +367,15 @@ test_that("log_likelihood_f function works as expected", {
   true_log_likelihood <- sum(df(x, df1 = 5, df2 = 10, log = TRUE))
 
   # Calculate the estimated log-likelihood for the correct F distribution
-  est_log_likelihood_correct <- log_likelihood_f(x, df1 = 5, df2 = 10)
+  est_log_likelihood_correct <-
+    log_likelihood_f(x, df1 = 5, df2 = 10)
 
   # Check if the estimated log-likelihood is close enough to the true log-likelihood
   expect_true(abs(est_log_likelihood_correct - true_log_likelihood) < 1)
 
   # Calculate the estimated log-likelihood for a different F distribution
-  est_log_likelihood_different <- log_likelihood_f(x, df1 = 10, df2 = 5)
+  est_log_likelihood_different <-
+    log_likelihood_f(x, df1 = 10, df2 = 5)
 
   # Check if the log-likelihood for the different distribution is less than the correct one
   expect_true(est_log_likelihood_different < est_log_likelihood_correct)
@@ -392,7 +408,8 @@ test_that("sensitivity function works as expected", {
   truth <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 
   # Calculate sensitivity
-  expected_sensitivity <- 2 / 3 # 2 true positives / (2 true positives + 1 false negative)
+  expected_sensitivity <-
+    2 / 3 # 2 true positives / (2 true positives + 1 false negative)
 
   # Check if the calculated sensitivity is equal to the expected value
   expect_equal(sensitivity(pred, truth), expected_sensitivity)
@@ -402,7 +419,8 @@ test_that("sensitivity function works as expected", {
   truth <- c(TRUE, TRUE, TRUE, FALSE, FALSE)
 
   # Calculate sensitivity
-  expected_sensitivity <- 2 / 3 # 2 true positives / (2 true positives + 1 false negative)
+  expected_sensitivity <-
+    2 / 3 # 2 true positives / (2 true positives + 1 false negative)
 
   # Check if the calculated sensitivity is equal to the expected value
   expect_equal(sensitivity(pred, truth), expected_sensitivity)
@@ -427,7 +445,8 @@ test_that("specificity function works as expected", {
   truth <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 
   # Calculate specificity
-  expected_specificity <- 1 / 2 # 1 true negative / (1 true negative + 1 false negative)
+  expected_specificity <-
+    1 / 2 # 1 true negative / (1 true negative + 1 false negative)
 
   # Check if the calculated specificity is equal to the expected value
   expect_equal(specificity(pred, truth), expected_specificity)
@@ -452,7 +471,8 @@ test_that("precision function works as expected", {
   truth <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 
   # Calculate precision
-  expected_precision <- 2 / 3 # 2 true positives / (2 true positives + 1 false positive)
+  expected_precision <-
+    2 / 3 # 2 true positives / (2 true positives + 1 false positive)
 
   # Check if the calculated precision is equal to the expected value
   expect_equal(precision(pred, truth), expected_precision)
@@ -477,7 +497,8 @@ test_that("recall function works as expected", {
   truth <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 
   # Calculate recall
-  expected_recall <- 2 / 3 # 2 true positives / (2 true positives + 1 false negative)
+  expected_recall <-
+    2 / 3 # 2 true positives / (2 true positives + 1 false negative)
 
   # Check if the calculated recall is equal to the expected value
   expect_equal(recall(pred, truth), expected_recall)
@@ -502,7 +523,8 @@ test_that("accuracy function works as expected", {
   truth <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 
   # Calculate accuracy
-  expected_accuracy <- 3 / 5 # 3 correct predictions / 5 total predictions
+  expected_accuracy <-
+    3 / 5 # 3 correct predictions / 5 total predictions
 
   # Check if the calculated accuracy is equal to the expected value
   expect_equal(accuracy(pred, truth), expected_accuracy)
@@ -576,27 +598,51 @@ test_that("minimum_n_per_group function works as expected", {
   d <- 0.5
   power <- 0.8
   min_n <- minimum_n_per_group(d, power)
-  result <- power.t.test(n = min_n, d = d, power = NULL, type = "two.sample")
+  result <-
+    power.t.test(
+      n = min_n,
+      d = d,
+      power = NULL,
+      type = "two.sample"
+    )
   expect_true(result$power >= power)
 
   # Test with custom power
   d <- 0.5
   power <- 0.9
   min_n <- minimum_n_per_group(d, power)
-  result <- power.t.test(n = min_n, d = d, power = NULL, type = "two.sample")
+  result <-
+    power.t.test(
+      n = min_n,
+      d = d,
+      power = NULL,
+      type = "two.sample"
+    )
   expect_true(result$power >= power)
 
   # Test with edge cases
   d <- 0.1
   power <- 0.95
   min_n <- minimum_n_per_group(d, power)
-  result <- power.t.test(n = min_n, d = d, power = NULL, type = "two.sample")
+  result <-
+    power.t.test(
+      n = min_n,
+      d = d,
+      power = NULL,
+      type = "two.sample"
+    )
   expect_true(result$power >= power)
 
   d <- 1
   power <- 0.99
   min_n <- minimum_n_per_group(d, power)
-  result <- power.t.test(n = min_n, d = d, power = NULL, type = "two.sample")
+  result <-
+    power.t.test(
+      n = min_n,
+      d = d,
+      power = NULL,
+      type = "two.sample"
+    )
   expect_true(result$power >= power)
 })
 
@@ -633,7 +679,7 @@ test_that("adj_R2 function works as expected", {
   pred <- c(1, 2, 3, 4, 5)
   truth <- c(3, 3, 3, 3, 3)
   n_p <- 1
-  expect_equal(adj_R2(pred, truth, n_p), -Inf)
+  expect_equal(adj_R2(pred, truth, n_p),-Inf)
 })
 
 
@@ -671,4 +717,3 @@ test_that("adj_R2 function works as expected", {
   expected_adj_r2 <- 1 - (1 - r_squared) * ((n - 1) / (n - n_p - 1))
   expect_equal(adj_R2(pred, truth, n_p), expected_adj_r2)
 })
-
