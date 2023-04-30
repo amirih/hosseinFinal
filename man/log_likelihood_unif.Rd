@@ -29,4 +29,5 @@ log_likelihood_unif(x, min = 2, max = 5)
 
 # Calculate the log-likelihood for a different uniform distribution
 log_likelihood_unif(x, min = 0, max = 10)
+
 }

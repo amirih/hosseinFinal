@@ -27,4 +27,5 @@ n_p <- 3
 
 # Calculate adjusted R-squared value
 adj_R2(pred, truth, n_p)
+
 }

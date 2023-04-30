@@ -24,4 +24,5 @@ power <- 0.9
 
 # Calculate minimum number of samples per group
 minimum_n_per_group(d, power)
+
 }

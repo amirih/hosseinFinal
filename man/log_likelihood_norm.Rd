@@ -24,4 +24,5 @@ x <- rnorm(100, mean = 5, sd = 2)
 mean_est <- mean(x)
 sd_est <- sd(x)
 log_likelihood_norm(x, mean_est, sd_est)
+
 }

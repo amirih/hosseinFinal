@@ -16,6 +16,7 @@
 #' # Sampling from a matrix
 #' mat <- matrix(1:9, nrow = 3, ncol = 3)
 #' rando(mat, n = 2, replace = FALSE)
+#'
 #' @export
 rando = function(x, n = 1, replace = T) {
   if (is.atomic(x) && !is.matrix(x)) {
@@ -69,7 +70,8 @@ is_min = function(x, na.rm = T) {
 #' is_max(c(1, 2, 3, 4, 5))
 #' # Example 2
 #' is_max(c(NA, 1, 2, 3, 4, 5))
-#'  @export
+#'
+#' @export
 is_max = function(x, na.rm = T) {
   if (na.rm) {
     x <- x[!is.na(x)]
@@ -154,6 +156,7 @@ rep_mat = function(x, M = 1, N = 1) {
 #' # Get the class of an object (a numeric vector)
 #' num_class <- classes(1:3)
 #' [1] "integer"
+#'
 #' @export
 classes = function(x) {
   if (is.data.frame(x) || is_tibble(x)) {
@@ -176,6 +179,7 @@ classes = function(x) {
 #'
 #' # Scale the numeric columns of the dataframe
 #' scaled_df <- df_scale(df)
+#'
 #' @export
 df_scale = function(x, center = T, scale = T) {
   classes_x = classes(x)
@@ -202,6 +206,7 @@ df_scale = function(x, center = T, scale = T) {
 #' mean_est <- mean(x)
 #' sd_est <- sd(x)
 #' log_likelihood_norm(x, mean_est, sd_est)
+#'
 #' @export
 log_likelihood_norm = function(x, mean, sd) {
   log_likelihood = sum(dnorm(x, mean = mean, sd = sd, log = TRUE))
@@ -224,6 +229,7 @@ log_likelihood_norm = function(x, mean, sd) {
 #'
 #' # Calculate the log-likelihood for a different uniform distribution
 #' log_likelihood_unif(x, min = 0, max = 10)
+#'
 #' @export
 log_likelihood_unif = function(x, min, max) {
   log_likelihood = sum(dunif(x, min = min, max = max, log = TRUE))
@@ -235,7 +241,6 @@ log_likelihood_unif = function(x, min, max) {
 #' @param x a numeric vector
 #' @param df degrees of freedom
 #' @return log-likelihood value
-#' @export
 #' @examples
 #' # Generate a sample from a chi-squared distribution
 #' set.seed(42)
@@ -246,6 +251,7 @@ log_likelihood_unif = function(x, min, max) {
 #'
 #' # Calculate the log-likelihood for a different chi-squared distribution
 #' log_likelihood_chisq(x, df = 10)
+#' @export
 log_likelihood_chisq = function(x, df) {
   log_likelihood = sum(dchisq(x, df = df, log = TRUE))
   return(log_likelihood)
@@ -267,6 +273,7 @@ log_likelihood_chisq = function(x, df) {
 #'
 #' # Calculate the log-likelihood for a different F distribution
 #' log_likelihood_f(x, df1 = 10, df2 = 5)
+#'
 #' @export
 log_likelihood_f = function(x, df1, df2) {
   log_likelihood = sum(df(x, df1 = df1, df2 = df2, log = TRUE))
@@ -288,6 +295,7 @@ log_likelihood_f = function(x, df1, df2) {
 #'
 #' # Calculate the log-likelihood for a different t distribution
 #' log_likelihood_t(x, df = 10)
+#'
 #' @export
 log_likelihood_t = function(x, df) {
   log_likelihood = sum(dt(x, df = df, log = TRUE))
@@ -306,6 +314,7 @@ log_likelihood_t = function(x, df) {
 #'
 #' # Calculate sensitivity
 #' sensitivity(pred, truth)
+#'
 #' @export
 sensitivity = function(pred, truth) {
   if (length(pred) != length(truth)) {
@@ -332,6 +341,7 @@ sensitivity = function(pred, truth) {
 #'
 #' # Calculate specificity
 #' specificity(pred, truth)
+#'
 #' @export
 specificity = function(pred, truth) {
   if (length(pred) != length(truth)) {
@@ -358,6 +368,7 @@ specificity = function(pred, truth) {
 #'
 #' # Calculate precision
 #' precision(pred, truth)
+#'
 #' @export
 precision = function(pred, truth) {
   if (length(pred) != length(truth)) {
@@ -384,6 +395,7 @@ precision = function(pred, truth) {
 #'
 #' # Calculate recall
 #' recall(pred, truth)
+#'
 #' @export
 recall = function(pred, truth) {
   if (length(pred) != length(truth)) {
@@ -410,6 +422,7 @@ recall = function(pred, truth) {
 #'
 #' # Calculate accuracy
 #' accuracy(pred, truth)
+#'
 #' @export
 accuracy = function(pred, truth) {
   if (length(pred) != length(truth)) {
@@ -436,6 +449,7 @@ accuracy = function(pred, truth) {
 #'
 #' # Calculate F1 score
 #' f1(pred, truth)
+#'
 #' @export
 f1 = function(pred, truth) {
   if (length(pred) != length(truth)) {
@@ -468,6 +482,7 @@ f1 = function(pred, truth) {
 #'
 #' # Calculate minimum number of samples per group
 #' minimum_n_per_group(d, power)
+#'
 #' @export
 minimum_n_per_group = function(d, power = 0.8) {
   result =
@@ -492,6 +507,7 @@ minimum_n_per_group = function(d, power = 0.8) {
 #'
 #' # Calculate R-squared value
 #' r2(pred, truth)
+#'
 #' @export
 r2 = function(pred, truth) {
   mean_truth = mean(truth)
@@ -516,6 +532,7 @@ r2 = function(pred, truth) {
 #'
 #' # Calculate adjusted R-squared value
 #' adj_R2(pred, truth, n_p)
+#'
 #' @export
 adj_R2 = function(pred, truth, n_p) {
   r_squared = r2(pred, truth)

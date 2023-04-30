@@ -34,11 +34,6 @@ test_that("rep_mat works",{
   expect_equal(ncol(replicated), 15)
 })
 
-test_that("rep_mat works",{
-  replicated = rep_mat(x_mat,2,3)
-  expect_equal(nrow(replicated), 4)
-  expect_equal(ncol(replicated), 15)
-})
 
 test_that("classes works",{
   x_df_classes = classes(x_df)

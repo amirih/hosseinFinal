@@ -27,4 +27,5 @@ log_likelihood_t(x, df = 5)
 
 # Calculate the log-likelihood for a different t distribution
 log_likelihood_t(x, df = 10)
+
 }

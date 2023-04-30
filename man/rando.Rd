@@ -31,4 +31,5 @@ rando(df, n = 2, replace = TRUE)
 # Sampling from a matrix
 mat <- matrix(1:9, nrow = 3, ncol = 3)
 rando(mat, n = 2, replace = FALSE)
+
 }

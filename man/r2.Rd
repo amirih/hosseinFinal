@@ -24,4 +24,5 @@ pred <- c(2.5, 0.0, 2, 8)
 
 # Calculate R-squared value
 r2(pred, truth)
+
 }

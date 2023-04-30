@@ -24,4 +24,5 @@ truth <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 
 # Calculate sensitivity
 sensitivity(pred, truth)
+
 }

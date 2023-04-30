@@ -27,4 +27,5 @@ column_classes <- classes(df)
 # Get the class of an object (a numeric vector)
 num_class <- classes(1:3)
 [1] "integer"
+
 }

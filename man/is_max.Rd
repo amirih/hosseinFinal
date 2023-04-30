@@ -22,5 +22,5 @@ Check if an element in a vector is the maximum
 is_max(c(1, 2, 3, 4, 5))
 # Example 2
 is_max(c(NA, 1, 2, 3, 4, 5))
- @export
+
 }

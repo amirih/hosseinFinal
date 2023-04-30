@@ -24,4 +24,5 @@ truth <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 
 # Calculate F1 score
 f1(pred, truth)
+
 }

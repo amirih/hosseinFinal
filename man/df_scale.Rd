@@ -25,4 +25,5 @@ df <- data.frame(a = 1:5, b = c("one", "two", "three", "four", "five"), c = 11:1
 
 # Scale the numeric columns of the dataframe
 scaled_df <- df_scale(df)
+
 }
